@@ -1,0 +1,18 @@
+{
+  "name": "campus-dev-marp",
+  "private": true,
+  "description": "Template Marp orientado a geracao de slides por agentes de IA",
+  "license": "MIT",
+  "scripts": {
+    "validate": "node scripts/validate-slides.mjs",
+    "audit:assets": "node scripts/audit-assets.mjs",
+    "audit:visual": "node scripts/audit-visual.mjs",
+    "export:html": "node scripts/export-slides.mjs --format html",
+    "export:pdf": "node scripts/export-slides.mjs --format pdf",
+    "export:pptx": "node scripts/export-slides.mjs --format pptx",
+    "export:template": "node scripts/export-slides.mjs --input slides/template.md --format html"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.1"
+  }
+}

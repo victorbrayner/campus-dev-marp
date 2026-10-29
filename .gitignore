@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.opencode/node_modules/
+.opencode/package-lock.json
+.opencode/package.json
+
+# Material do professor: fica no disco, mas nao vai para o repositorio publico.
+# O _template.md continua publico porque o fluxo de agentes depende dele.
+briefs/*
+!briefs/_template.md
+model/
+
+Thumbs.db
+.DS_Store

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-label="Placeholder visual">
+  <rect width="720" height="420" fill="#e9edf2"/>
+  <rect x="18" y="18" width="684" height="384" fill="none" stroke="#1e88e5" stroke-width="3" stroke-dasharray="12 10"/>
+  <path d="M120 310l120-130 90 92 70-64 200 102H120z" fill="#b8c8dc"/>
+  <circle cx="515" cy="135" r="34" fill="#7c3aed" opacity=".8"/>
+  <text x="360" y="370" fill="#101f38" font-family="monospace" font-size="22" text-anchor="middle">IMAGEM OU DIAGRAMA</text>
+</svg>
