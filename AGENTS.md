@@ -21,4 +21,18 @@ Regras operacionais:
 - Execute `npm run validate` depois de editar um deck.
 - Execute `npm run export:html -- --input slides/decks/seu-deck.md` quando precisar
   conferir a exportação.
+- Execute `npm run preview -- --input slides/decks/seu-deck.md` para renderizar
+  cada slide em PNG (`dist/previews/`) e revisar visualmente antes do PDF.
+- O `npm run audit:visual` também mede a densidade dos decks (o catálogo
+  `slides/template.md` fica fora): avisa quando o vazio entre o conteúdo e o
+  fecho passa de 250 px ou quando o fecho cola no conteúdo.
 - Não remova alterações existentes para resolver problemas não relacionados.
+
+## Metadados recorrentes
+
+Use estes valores nos decks, salvo indicação diferente no roteiro:
+
+- autor e byline: **Prof. Victor Brayner**, com a linha secundária
+  `ads · <semestre>`;
+- rodapé do front matter: `'DISCIPLINA · UNIDADE X'`, em caixa alta;
+- semestre corrente: 2026.2.

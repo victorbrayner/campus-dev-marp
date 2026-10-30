@@ -185,6 +185,7 @@ Densidade não significa preencher todo o canvas. Significa maximizar informaç�
 - Mire em conteúdo + fecho ocupando cerca de 80% da altura útil. Se o último
   bloco terminar antes de y≈430 ou o vazio até o fecho passar de ~250 px,
   acrescente uma terceira zona (fluxo, tabela, cards) ou divida o slide.
+  O `audit:visual` mede esse vazio e avisa acima de 250 px.
 - Se o conteúdo ultrapassar esses limites, divida em slides consecutivos.
 
 Evite repetir a mesma informação no título, subtítulo, corpo e callout.

@@ -116,7 +116,7 @@ for (const [index, file] of files.entries()) {
   }
 
   const audit = await page.evaluate(
-    ({ CONTENT, SLIDE_CENTER, FONT_SCALE, MIN_FONT }) => {
+    ({ CONTENT, SLIDE_CENTER, FONT_SCALE, MIN_FONT, checkDensity }) => {
       const out = [];
       const round = (value) => Math.round(value);
       const add = (severity, slide, message) => out.push({ severity, slide, message });
@@ -204,6 +204,43 @@ for (const [index, file] of files.entries()) {
           }
         }
 
+        // ---- densidade: vazio entre o conteúdo e o fecho (só decks) ----
+        if (checkDensity && !isTitle) {
+          const closerSelector =
+            '.callout, .takeaway, .notice.closer, .panel.closer, .quote.closer';
+          const closer = section.querySelector(closerSelector);
+          const visualLeaves = [
+            ...section.querySelectorAll(
+              'svg, table, pre, img, .notice, .panel, .card, .node, .step, .stat, .quote',
+            ),
+          ];
+          let contentBottom = 0;
+          for (const el of [...leafText, ...visualLeaves]) {
+            if (!visible(el)) continue;
+            if (closer && el.closest(closerSelector)) continue;
+            contentBottom = Math.max(contentBottom, box(el).bottom);
+          }
+          if (contentBottom > 0) {
+            const gap = closer
+              ? box(closer).top - contentBottom
+              : CONTENT.bottom - contentBottom;
+            if (gap > 250) {
+              add(
+                'warning',
+                slide,
+                `vazio de ${round(gap)}px entre o conteúdo e ${closer ? 'o fecho' : 'a base do slide'}; ` +
+                  'acrescente uma terceira zona ou divida o slide.',
+              );
+            } else if (closer && gap < 8) {
+              add(
+                'warning',
+                slide,
+                `fecho colado ao conteúdo (${round(gap)}px); use .stack para espaçar.`,
+              );
+            }
+          }
+        }
+
         for (const twoCol of section.querySelectorAll('.two-col')) {
           for (const col of twoCol.querySelectorAll(':scope > .col')) {
             const paragraphs = [...col.children].filter(
@@ -285,7 +322,13 @@ for (const [index, file] of files.entries()) {
 
       return out;
     },
-    { CONTENT, SLIDE_CENTER, FONT_SCALE, MIN_FONT },
+    {
+      CONTENT,
+      SLIDE_CENTER,
+      FONT_SCALE,
+      MIN_FONT,
+      checkDensity: relative(file).startsWith('slides/decks/'),
+    },
   );
 
   for (const issue of audit) add(file, issue.severity, issue.slide, issue.message);

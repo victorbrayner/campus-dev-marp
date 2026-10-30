@@ -10,7 +10,8 @@
     "export:html": "node scripts/export-slides.mjs --format html",
     "export:pdf": "node scripts/export-slides.mjs --format pdf",
     "export:pptx": "node scripts/export-slides.mjs --format pptx",
-    "export:template": "node scripts/export-slides.mjs --input slides/template.md --format html"
+    "export:template": "node scripts/export-slides.mjs --input slides/template.md --format html",
+    "preview": "node scripts/render-previews.mjs"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "4.5.1"

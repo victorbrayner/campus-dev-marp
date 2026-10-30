@@ -212,3 +212,20 @@ inline.
   não devem ocupar a largura inteira.
 - Diagramas técnicos usam SVG inline, nunca raster; siga a skill
   `slide-visuals` e o `scripts/diagram-kit.mjs`.
+
+## Armadilhas de layout
+
+Comportamentos do tema que costumam causar retrabalho:
+
+- `.two-col` e `.cards` crescem (`flex: 1`) e empurram o que vem depois para o
+  rodapé; quando o conteúdo do grid é curto, o vazio sobra dentro dele. Uma
+  terceira zona (tabela, lista, `flow` ou fecho) fecha o slide.
+- Blocos encadeados sem `.stack` colam uns nos outros (fluxo, legenda, cards e
+  fecho com quase zero de respiro). Envolva o grupo em `.stack` para o
+  espaçamento de 12 px.
+- `.callout`, `.takeaway` e `.closer` ancoram no pé do slide; com conteúdo curto
+  acima, abre um buraco no meio.
+- O `audit:visual` mede o vazio entre o último bloco de conteúdo e o fecho e
+  avisa acima de 250 px, e também quando o fecho cola no conteúdo (menos de
+  8 px). Texto, tabela, código, SVG e imagem contam como conteúdo; a caixa
+  esticada do grid, não.

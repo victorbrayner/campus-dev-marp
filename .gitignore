@@ -9,6 +9,8 @@ dist/
 briefs/*
 !briefs/_template.md
 model/
+slides/decks/*
+!slides/decks/aula-04-piloto-v2.md
 
 Thumbs.db
 .DS_Store
