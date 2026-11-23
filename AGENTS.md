@@ -8,7 +8,7 @@ Regras operacionais:
 - Ao modelar um brief a partir do roteiro original ou ao criar/editar um deck, carregue a skill `humanizer` (`.opencode/skills/humanizer/SKILL.md`) e aplique seus padrões ao texto do brief e dos slides, dentro das restrições de densidade e estilo de `SLIDES_AGENT.md`.
 - As pastas `briefs/` (exceto `_template.md`) e `model/` contêm material do professor e não são versionadas no repositório público.
 - Ao criar ou editar um deck com diagramas, carregue a skill `slide-visuals` (`.opencode/skills/slide-visuals/SKILL.md`) e use SVG inline; não use raster.
-- O roteiro original é material do professor. O brief separa a condução (não exibida) do conteúdo do aluno; os slides não levam respostas esperadas, notas de quadro ou critérios de avaliação.
+- O roteiro original é material do professor. O brief separa a condução (não exibida) do conteúdo do aluno; os slides não levam respostas esperadas, notas de quadro, critérios de avaliação nem logística de sala (minutos por etapa, formação de grupos, verificação oral). O público do slide é o aluno: rótulos e instruções falam com quem estuda, não com quem conduz.
 
 - `slides/template.md` é um catálogo de componentes e não deve ser usado como
   arquivo de uma apresentação real.

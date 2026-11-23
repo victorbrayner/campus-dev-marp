@@ -16,6 +16,12 @@ decisão importante; não deve inventar dados.
 > avaliação ficam em `Condução do Professor (não exibir)`. O slide recebe
 > conceito, exemplo, diagrama, pergunta sem resposta, instrução de atividade
 > e síntese.
+>
+> **O slide fala com o aluno.** Rótulos de condução (“retomada”, “para abrir
+> a aula”), cronograma de minutos, formação de grupos e momentos conduzidos
+> pelo professor (“verificação oral”, “registro individual”) ficam fora do
+> slide. Atividade entra como conteúdo de estudo: cenário, enunciado e
+> perguntas sem resposta, sem logística de sala.
 
 ## Metadados
 
@@ -295,6 +301,8 @@ Considere o deck pronto somente quando:
 - [ ] a tese central aparece com clareza;
 - [ ] todos os conteúdos obrigatórios foram cobertos;
 - [ ] o nível de linguagem corresponde ao público;
+- [ ] nenhum rótulo de condução, cronograma de minutos ou formação de grupos
+      aparece no slide;
 - [ ] os títulos orientam a conclusão de cada slide;
 - [ ] o deck não contém dados inventados;
 - [ ] cada imagem tem `alt` e asset local existente;

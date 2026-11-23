@@ -118,6 +118,24 @@ quem assiste. Ao modelar o brief:
 - aplique a skill `humanizer` ao brief e ao texto dos slides; não copie o
   roteiro original para o slide.
 
+O público do slide é o aluno. Palavra de condução e logística de sala não
+entram no texto, mesmo quando o roteiro original as traz:
+
+- rótulos de condução: “retomada”, “abertura”, “para abrir a aula”,
+  “demonstração”, “transição”, “fala-chave”, “para a turma”, “no comentário”;
+- momentos conduzidos pelo professor: “verificação oral”, “verificação de
+  saída”, “registro individual”, “como participar”;
+- cronograma e logística: minutos por etapa, “duplas” ou “grupos de N”,
+  “socialização”, “correção”.
+
+Para rótulos, prefira a linguagem de quem estuda: `REVISÃO` ou `PONTO DE
+PARTIDA` para contexto, `PERGUNTAS GUIA` para perguntas, `EXERCÍCIO` com o tema
+no eyebrow (por exemplo `EXERCÍCIO · MODELAGEM EM GRAFO`), `AUTOVERIFICAÇÃO`
+para checagem de estudo e `PARA ANOTAR` para registro. Atividade é conteúdo de
+estudo e pode entrar: cenário, enunciado e pergunta sem resposta. Instruções
+de procedimento vão no infinitivo (“executar”, “consultar”), não no imperativo
+de sala (“executem”, “consultem”).
+
 ### 1. Construir o argumento
 
 Escreva primeiro uma frase de tese e um outline textual. Cada slide deve
@@ -363,6 +381,8 @@ Antes de considerar o deck pronto:
 - [ ] Nenhum `_style` foi usado para espaçamento, fonte ou paginação.
 - [ ] Toda tabela tem cabeçalho em todas as colunas.
 - [ ] Nenhuma resposta esperada, nota de condução ou critério de avaliação aparece no slide.
+- [ ] Nenhum rótulo de condução, cronograma de minutos ou formação de grupos
+      aparece no slide; o texto fala com o aluno.
 - [ ] Os diagramas previstos no brief foram produzidos e estão no slide certo.
 - [ ] Diagramas técnicos usam SVG inline, sem raster.
 - [ ] Todo diagrama tem `alt`, legenda e rótulos legíveis no PDF.
