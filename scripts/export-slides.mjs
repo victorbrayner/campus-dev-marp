@@ -15,9 +15,24 @@ if (!supported.has(format)) {
   process.exit(1);
 }
 
-const outputDir = path.resolve('dist');
+const inputPath = path.resolve(input);
+// Decks em slides/decks/<disciplina>/ exportam para dist/<disciplina>/;
+// arquivos fora de slides/decks/ (ex.: slides/template.md) ficam em dist/.
+const decksDir = path.resolve('slides', 'decks');
+const relative = path.relative(decksDir, inputPath);
+const insideDecks =
+  relative !== '' &&
+  !relative.startsWith('..') &&
+  !path.isAbsolute(relative) &&
+  relative.split(path.sep).length > 1;
+const outputDir = insideDecks
+  ? path.resolve('dist', relative.split(path.sep)[0])
+  : path.resolve('dist');
 fs.mkdirSync(outputDir, { recursive: true });
-const output = path.join(outputDir, `${path.basename(input, path.extname(input))}.${format}`);
+const output = path.join(
+  outputDir,
+  `${path.basename(inputPath, path.extname(inputPath))}.${format}`,
+);
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 // --html is required for inline HTML/SVG in the PDF/PNG/PPTX renderer;
 // the front-matter `html: true` alone is not enough for inline SVG.

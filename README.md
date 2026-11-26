@@ -103,12 +103,14 @@ npm run audit:assets -- slides/decks/seu-deck.md
 npm run audit:visual -- slides/decks/seu-deck.md   # usa Chrome ou Edge; defina CHROME_PATH se preciso
 ```
 
-Exportação para HTML, PDF ou PPTX (saída em `dist/`, não versionada):
+Exportação para HTML, PDF ou PPTX (não versionada): decks em
+`slides/decks/<disciplina>/` saem em `dist/<disciplina>/`; arquivos fora de
+`slides/decks/` (ex.: o catálogo `slides/template.md`) saem em `dist/`.
 
 ```bash
-npm run export:html -- --input slides/decks/seu-deck.md
-npm run export:pdf  -- --input slides/decks/seu-deck.md
-npm run export:pptx -- --input slides/decks/seu-deck.md
+npm run export:html -- --input slides/decks/<disciplina>/seu-deck.md
+npm run export:pdf  -- --input slides/decks/<disciplina>/seu-deck.md
+npm run export:pptx -- --input slides/decks/<disciplina>/seu-deck.md
 ```
 
 Notas técnicas:

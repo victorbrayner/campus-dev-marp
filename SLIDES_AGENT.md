@@ -14,7 +14,7 @@ exportáveis, preservando a linguagem visual do modelo original.
    gere-o a partir do original antes do deck.
 4. Leia `slides/COMPONENTS.md` e a classificação núcleo/opcional antes de escolher o componente.
 5. Consulte o exemplo correspondente em `slides/template.md`.
-6. Crie o deck em `slides/decks/`, nunca dentro do catálogo.
+6. Crie o deck em `slides/decks/<disciplina>/`, nunca dentro do catálogo.
 7. Execute `npm run validate -- --input slides/decks/seu-deck.md`,
    `npm run audit:assets -- slides/decks/seu-deck.md` e
    `npm run audit:visual -- slides/decks/seu-deck.md`.
@@ -41,7 +41,7 @@ O fluxo começa com o arquivo `.md` que o professor já tem. Ele é salvo em
    diagrama. O deck não começa antes desta revisão. Respostas esperadas,
    notas de quadro e critérios de avaliação ficam no brief; não vão para o
    slide.
-4. **Gerar o deck.** Peça o arquivo em `slides/decks/AAAA-MM-DD--titulo.md`,
+4. **Gerar o deck.** Peça o arquivo em `slides/decks/<disciplina>/AAAA-MM-DD--titulo.md`,
    conforme `AGENTS.md`. O agente aplica `humanizer`, usa os componentes de
    `COMPONENTS.md` e, quando houver diagrama, SVG inline com `alt` e legenda.
    O roteiro original não é copiado para os slides.
@@ -67,7 +67,7 @@ O fluxo começa com o arquivo `.md` que o professor já tem. Ele é salvo em
 
    Revise o PDF, não só o preview: fontes, diagramas, tabelas, rodapé,
    paginação e área útil.
-7. **Publicar.** O deck fica em `slides/decks/`; o brief em
+7. **Publicar.** O deck fica em `slides/decks/<disciplina>/`; o brief em
    `briefs/<aula>.md`; o original em `briefs/<aula>-original.md`. Assets
    externos ficam em `slides/assets/`, com `alt`, fonte e licença.
 
@@ -365,7 +365,7 @@ Coloque assets em `slides/assets/` e siga estas convenções:
 
 Antes de considerar o deck pronto:
 
-- [ ] O arquivo está em `slides/decks/`.
+- [ ] O arquivo está em `slides/decks/<disciplina>/`.
 - [ ] O front matter está correto.
 - [ ] Cada slide tem uma tese clara.
 - [ ] Os títulos são conclusivos ou orientam a leitura.

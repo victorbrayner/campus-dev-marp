@@ -12,15 +12,18 @@ Regras operacionais:
 
 - `slides/template.md` é um catálogo de componentes e não deve ser usado como
   arquivo de uma apresentação real.
-- Decks gerados devem ficar em `slides/decks/`.
+- Decks gerados devem ficar em `slides/decks/<disciplina>/`, com a pasta da
+  disciplina em minúsculas, sem acentos e com palavras separadas por hífen
+  (ex.: `banco-de-dados`, `arquitetura-computacional`).
 - Nomeie cada deck final no formato `AAAA-MM-DD--titulo-da-aula.md`, usando a
   data e o título do roteiro e convertendo o título para minúsculas, sem acentos
   e com palavras separadas por hífen.
 - Assets locais devem ficar em `slides/assets/`.
 - Consulte `slides/COMPONENTS.md` antes de inventar um layout novo.
 - Execute `npm run validate` depois de editar um deck.
-- Execute `npm run export:html -- --input slides/decks/seu-deck.md` quando precisar
-  conferir a exportação.
+- Execute `npm run export:html -- --input slides/decks/<disciplina>/seu-deck.md`
+  quando precisar conferir a exportação; a saída vai para `dist/<disciplina>/`
+  (arquivos fora de `slides/decks/`, como o catálogo, saem em `dist/`).
 - Execute `npm run preview -- --input slides/decks/seu-deck.md` para renderizar
   cada slide em PNG (`dist/previews/`) e revisar visualmente antes do PDF.
 - O `npm run audit:visual` também mede a densidade dos decks (o catálogo

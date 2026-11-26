@@ -14,7 +14,7 @@ const files = inputArgs.length
   ? inputArgs.map((input) => path.resolve(root, input))
   : [
       template,
-      ...fs.readdirSync(decksDir)
+      ...fs.readdirSync(decksDir, { recursive: true })
         .filter((name) => name.endsWith('.md') && !/README|Briefings|Roteiros/.test(name))
         .map((name) => path.join(decksDir, name)),
     ];
