@@ -86,7 +86,7 @@ for (const url of remoteImages) {
 }
 
 const placeholders = [
-  ...body.matchAll(/\b(?:TODO|PLACEHOLDER)\b/g),
+  ...body.matchAll(/(?<![A-Za-zÀ-ÿ])(?:TODO|PLACEHOLDER)(?![A-Za-zÀ-ÿ])/g),
   ...body.matchAll(/Lorem ipsum/gi),
 ];
 if (placeholders.length) warn(`${placeholders.length} placeholder(s) textual(is) encontrado(s). Use [DADO NECESSÁRIO] quando for intencional.`);

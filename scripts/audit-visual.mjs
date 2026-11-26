@@ -311,6 +311,57 @@ for (const [index, file] of files.entries()) {
           }
         }
 
+        // ---- geometria do SVG: texto dentro do viewBox e da caixa ----
+        for (const figure of section.querySelectorAll('svg')) {
+          const vb = figure.viewBox && figure.viewBox.baseVal;
+          if (!vb || !vb.width || !vb.height) continue;
+          const tol = 2;
+          const rects = [...figure.querySelectorAll('rect')]
+            .map((r) => ({
+              x: Number(r.getAttribute('x')) || 0,
+              y: Number(r.getAttribute('y')) || 0,
+              w: Number(r.getAttribute('width')) || 0,
+              h: Number(r.getAttribute('height')) || 0,
+            }))
+            .filter((r) => r.w > 0 && r.h > 0);
+          for (const textEl of figure.querySelectorAll('text')) {
+            let bb;
+            try {
+              bb = textEl.getBBox();
+            } catch {
+              continue;
+            }
+            if (!bb || (bb.width === 0 && bb.height === 0)) continue;
+            const label = (textEl.textContent || '').trim().slice(0, 32);
+            if (
+              bb.x < vb.x - tol ||
+              bb.y < vb.y - tol ||
+              bb.x + bb.width > vb.x + vb.width + tol ||
+              bb.y + bb.height > vb.y + vb.height + tol
+            ) {
+              add('warning', slide, `texto do SVG fora do viewBox: "${label}"`);
+              continue;
+            }
+            const cx = bb.x + bb.width / 2;
+            const cy = bb.y + bb.height / 2;
+            let host = null;
+            for (const r of rects) {
+              if (cx >= r.x && cx <= r.x + r.w && cy >= r.y && cy <= r.y + r.h) {
+                if (!host || r.w * r.h < host.w * host.h) host = r;
+              }
+            }
+            if (!host) continue;
+            if (
+              bb.x < host.x - tol ||
+              bb.y < host.y - tol ||
+              bb.x + bb.width > host.x + host.w + tol ||
+              bb.y + bb.height > host.y + host.h + tol
+            ) {
+              add('warning', slide, `texto do SVG cruza a borda da caixa: "${label}"`);
+            }
+          }
+        }
+
         if (!pageNumberChecked) {
           const after = getComputedStyle(section, '::after');
           if (after.content !== 'none' && after.padding !== '0px') {

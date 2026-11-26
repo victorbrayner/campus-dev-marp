@@ -30,7 +30,12 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
 <div class="two-col">
   <div class="col">
     <span class="label">O que já sabemos</span>
-    <p>A CPU executa instruções. A memória mantém instruções e dados disponíveis. Entrada, saída e armazenamento completam o sistema.</p>
+    <p>O computador reúne componentes que trabalham juntos.</p>
+    <ul class="list tight">
+      <li>A CPU executa instruções.</li>
+      <li>A memória mantém instruções e dados disponíveis.</li>
+      <li>Entrada, saída e armazenamento completam o sistema.</li>
+    </ul>
     <p class="muted">Um programa organiza operações que precisam ser executadas.</p>
   </div>
   <div class="col">
@@ -40,7 +45,9 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li>Executar tudo em sequência?</li>
       <li>Dividir o trabalho entre unidades?</li>
       <li>Usar vários computadores?</li>
+      <li>Combinar as duas coisas?</li>
     </ul>
+    <p class="muted">A resposta depende de como os recursos se combinam.</p>
   </div>
 </div>
 
@@ -73,6 +80,8 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
   <div class="col">
     <span class="label">Quando a sequência ajuda</span>
     <p>Coletar dados, validar, calcular e gerar o relatório: cada etapa usa o resultado da anterior.</p>
+    <p>Cada etapa só começa quando a anterior termina.</p>
+    <p>A fila única aparece em qualquer etapa que dependa da anterior.</p>
     <p class="muted">A ordem protege o resultado e evita trabalho sobre dados incompletos.</p>
   </div>
   <div class="col">
@@ -81,7 +90,10 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li>Uma única fila atende uma etapa por vez.</li>
       <li>Partes independentes esperam sem necessidade.</li>
       <li>O tempo total cresce com o número de etapas.</li>
+      <li>A etapa lenta trava todas as seguintes.</li>
+      <li>O resultado final espera a última etapa da fila.</li>
     </ul>
+    <p class="muted">Sequência e paralelismo se combinam no mesmo sistema.</p>
   </div>
 </div>
 
@@ -122,23 +134,24 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
   <div class="card">
     <span class="n">01</span>
     <h3>Dividir</h3>
-    <p>Uma equipe prepara partes diferentes dos pratos.</p>
+    <p>Uma equipe prepara partes diferentes dos pratos. O trabalho total cai quando cada parte avança em paralelo.</p>
   </div>
   <div class="card c-purple">
     <span class="n">02</span>
     <h3>Coordenar</h3>
-    <p>Ingredientes e resultados precisam chegar na hora certa.</p>
+    <p>Ingredientes e resultados precisam chegar na hora certa. Sem coordenação, os resultados chegam fora de hora.</p>
   </div>
   <div class="card c-teal">
     <span class="n">03</span>
     <h3>Respeitar dependências</h3>
-    <p>Etapas que dependem de outras mantêm a ordem.</p>
+    <p>Etapas que dependem de outras mantêm a ordem. Inverter a ordem estraga o resultado.</p>
   </div>
 </div>
 
 <div class="panel c-orange closer">
   <span class="label">Limite da analogia</span>
   <p>Computadores exigem coordenação explícita de dados e execução. Dividir pessoas não resolve isso.</p>
+  <p>Dividir sem coordenar troca tempo por retrabalho.</p>
 </div>
 
 ---
@@ -166,6 +179,8 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
     <span class="label">A definição</span>
     <p>Um <strong>multiprocessador</strong> reúne múltiplas unidades de processamento em uma mesma máquina ou sistema.</p>
     <p class="muted">Em organizações comuns, as unidades compartilham a memória principal e outros recursos.</p>
+    <p>As unidades trocam dados pela memória ou por interconexões internas.</p>
+    <p class="muted">A memória compartilhada torna a comunicação entre as unidades direta.</p>
   </div>
   <div class="col">
     <span class="label">Termos próximos</span>
@@ -173,6 +188,7 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li><strong>Processador:</strong> unidade de hardware que executa instruções.</li>
       <li><strong>Núcleo:</strong> unidade de processamento dentro do processador.</li>
       <li><strong>Sistema:</strong> conjunto que reúne processadores, memória e recursos.</li>
+      <li>Para os programas, o conjunto parece um computador único.</li>
     </ul>
   </div>
 </div>
@@ -214,6 +230,7 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li>Comunicar por memória.</li>
       <li>Executar tarefas simultâneas.</li>
       <li>Ampliar a capacidade para cargas paralelizáveis.</li>
+      <li>Manter um único conjunto de dados para o sistema.</li>
     </ul>
   </div>
   <div class="panel c-orange">
@@ -223,6 +240,7 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li>Lidar com disputa por recursos.</li>
       <li>Pagar o custo da comunicação interna.</li>
       <li>Depender do programa e da carga.</li>
+      <li>Evitar que o acesso de uma unidade bloqueie as outras.</li>
     </ul>
   </div>
 </div>
@@ -257,6 +275,8 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
     <span class="label">A definição</span>
     <p>Um <strong>multicomputador</strong> reúne computadores autônomos, chamados de nós, cada um com seu processador e memória local.</p>
     <p class="muted">A comunicação acontece por rede ou interconexão, com troca de mensagens.</p>
+    <p>Cada nó tem seu próprio sistema operacional e executa seus programas.</p>
+    <p class="muted">A comunicação explícita custa tempo e planejamento.</p>
   </div>
   <div class="col">
     <span class="label">O que muda</span>
@@ -264,7 +284,10 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
       <li>Não há uma memória única compartilhada.</li>
       <li>Cada nó usa a própria memória.</li>
       <li>A rede transporta dados e resultados.</li>
+      <li>A troca de mensagens torna a comunicação explícita.</li>
+      <li>Cada nó pode rodar um programa diferente.</li>
     </ul>
+    <p class="muted">A independência dos nós também cria pontos de falha.</p>
   </div>
 </div>
 
@@ -365,11 +388,14 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
   <div class="panel c-teal">
     <span class="label">Balanceamento</span>
     <p>Distribuir o trabalho de modo que as unidades tenham quantidades compatíveis.</p>
+    <p>O balanceamento é uma decisão de projeto, não um detalhe da execução.</p>
     <p class="muted">Uma unidade com muito mais trabalho define o tempo final.</p>
+    <p>Distribuições desiguais aparecem mesmo com uma divisão inicial equilibrada.</p>
   </div>
   <div class="panel c-orange">
     <span class="label">Dependências</span>
     <p>Se B depende de A, as duas não avançam livremente ao mesmo tempo.</p>
+    <p>A cadeia define a ordem mínima; o restante do trabalho pode rodar junto.</p>
     <p class="muted">Outras partes independentes ainda podem ser paralelizadas.</p>
   </div>
 </div>
@@ -389,17 +415,17 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
   <div class="card">
     <span class="n">01</span>
     <h3>Imagens independentes</h3>
-    <p>Dividir em lotes e distribuir. Pode ser uma máquina ou vários computadores.</p>
+    <p>Dividir em lotes e distribuir. Pode ser uma máquina ou vários computadores. O ganho aparece quando os lotes não se comunicam.</p>
   </div>
   <div class="card c-purple">
     <span class="n">02</span>
     <h3>Etapas dependentes</h3>
-    <p>B usa o resultado de A. As duas não podem rodar ao mesmo tempo.</p>
+    <p>B usa o resultado de A. As duas não podem rodar ao mesmo tempo. A ordem da cadeia limita o paralelismo.</p>
   </div>
   <div class="card c-teal">
     <span class="n">03</span>
     <h3>Muitas solicitações</h3>
-    <p>Um portal pode usar uma máquina maior, processos ou nós. O enunciado não decide sozinho.</p>
+    <p>Um portal pode usar uma máquina maior, processos ou nós. O enunciado não decide sozinho. A escolha depende de onde ficam os dados.</p>
   </div>
 </div>
 
@@ -465,6 +491,8 @@ footer: 'ARQUITETURA COMPUTACIONAL · UNIDADE I'
     <p>Cite um custo que pode reduzir o ganho do processamento paralelo.</p>
   </div>
 </div>
+
+<p class="muted">Use os termos da aula: memória, comunicação e organização.</p>
 
 <div class="notice closer">
   <span class="notice-title">Formato</span>

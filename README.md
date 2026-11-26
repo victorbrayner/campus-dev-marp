@@ -96,11 +96,13 @@ npm run validate
 npm run validate -- --input slides/decks/seu-deck.md
 ```
 
-Auditorias complementares (assets e renderização):
+Auditorias complementares (assets, renderização e convenções):
 
 ```bash
+npm run audit -- --input slides/decks/seu-deck.md   # validate + assets + visual de uma vez
 npm run audit:assets -- slides/decks/seu-deck.md
 npm run audit:visual -- slides/decks/seu-deck.md   # usa Chrome ou Edge; defina CHROME_PATH se preciso
+npm run audit:conventions -- slides/decks/seu-deck.md
 ```
 
 Exportação para HTML, PDF ou PPTX (não versionada): decks em

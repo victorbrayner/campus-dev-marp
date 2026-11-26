@@ -29,7 +29,9 @@ O fluxo começa com o arquivo `.md` que o professor já tem. Ele é salvo em
    `briefs/<aula>-original.md` (por exemplo,
    `briefs/aula-05-original.md`). Se houver versões, use
    `-original-v2.md`, `-original-v3.md`. Não formate e não preencha
-   metadados: o texto original é a fonte.
+   metadados: o texto original é a fonte. Se o roteiro chegar com o nome no
+   padrão `AAAA-MM-DD-titulo.md`, renomeie para `<aula>-original.md` antes de
+   modelar o brief.
 2. **Gerar o brief.** Peça ao agente para ler o original, este arquivo,
    `slides/COMPONENTS.md`, `briefs/_template.md` e a skill `humanizer`; se
    houver diagrama, também a skill `slide-visuals`. O agente cria
@@ -53,6 +55,7 @@ O fluxo começa com o arquivo `.md` que o professor já tem. Ele é salvo em
    npm run audit:visual -- slides/decks/AAAA-MM-DD--titulo.md
    ```
 
+   Ou, de uma vez: `npm run audit -- --input slides/decks/AAAA-MM-DD--titulo.md`.
    O alvo é zero erro. Avisos de título em duas linhas ou de variedade devem
    ser corrigidos ou justificados. Para rodar em todos os decks, omita o
    caminho em `audit:assets` e `audit:visual`. O `audit:visual` usa Chrome ou
@@ -76,6 +79,32 @@ pasta local que não é versionada (exceto `_template.md`). Para acrescentar um
 slide a um deck existente, atualize o brief e
 o deck, rode as três auditorias no arquivo e reexporte o PDF; não é necessário
 refazer o brief inteiro.
+
+## Runbook de lote (processando um roteiro)
+
+Para processar um roteiro novo em lote agêntico, siga esta sequência usando os
+artefatos dourados como referência:
+
+1. Leia o original em `briefs/<aula>-original.md` e confira a unidade no
+   cabeçalho; o rodapé do deck segue `DISCIPLINA · UNIDADE X`.
+2. Modele o brief em `briefs/<aula>.md` com a estrutura de `_template.md`; a
+   condução fica em `Condução do Professor (não exibir)`. Brief dourado:
+   `briefs/2026-08-07-introducao-a-banco-de-dados-conceitos-objetivos-e-aplicacoes.md`.
+3. Gere o deck em `slides/decks/<disciplina>/AAAA-MM-DD--titulo.md`, seguindo
+   os componentes e as receitas de densidade acima. Deck dourado:
+   `slides/decks/banco-de-dados/2026-08-07--introducao-a-banco-de-dados-conceitos-objetivos-e-aplicacoes.md`
+   (20 slides, 0 avisos).
+4. Diagramas: deixe `<!--SVG:<id>-->` dentro de `.media` e gere o SVG com um
+   script Node descartável que importa `scripts/diagram-kit.mjs` por
+   `file:///`, substitui o placeholder e grava com
+   `fs.writeFileSync(..., 'utf8')`. Nunca escreva o SVG via PowerShell
+   (quebra acentos).
+5. Rode `npm run audit -- --input <deck>` e corrija até 0 erro/0 aviso.
+6. Exporte o PDF com `npm run export:pdf -- --input <deck>`.
+7. Opcional: `npm run preview -- --input <deck>` para PNGs de revisão.
+
+Com este runbook, cada novo roteiro é um prompt curto ("execute o runbook de
+`SLIDES_AGENT.md` para `briefs/<aula>-original.md`"), sem repetir as regras.
 
 ## Entradas necessárias
 
@@ -205,6 +234,23 @@ Densidade não significa preencher todo o canvas. Significa maximizar informaç�
   acrescente uma terceira zona (fluxo, tabela, cards) ou divida o slide.
   O `audit:visual` mede esse vazio e avisa acima de 250 px.
 - Se o conteúdo ultrapassar esses limites, divida em slides consecutivos.
+
+### Receitas de densidade que passam no `audit:visual`
+
+Os limites acima ficam previsíveis com três formas:
+
+- `two-col`: rótulo + 1-2 parágrafos + lista de 4-5 itens. Itens com um exemplo
+  entre parênteses rendem duas linhas cada e levam o fim do conteúdo para
+  y≈430; colunas de duas ou três linhas sozinhas ficam em y≈330 e geram aviso.
+- `cards cols-3/4`: título + corpo de duas frases. Com uma frase só, o slide
+  costuma terminar alto demais.
+- Terceira zona: `.flow`, `.list.arrow` ou tabela curta, sempre dentro de
+  `.stack` (o `.stack` fornece os 12 px de respiro entre as zonas).
+- `.media` com SVG (viewBox 960×260-360) fecha o slide sozinho; não precisa de
+  fecho.
+- Diagnóstico do aviso "vazio > 250 px": primeiro engrosse as colunas ou os
+  cards; se ainda faltar, acrescente a terceira zona. `_style` nunca é a
+  resposta.
 
 Evite repetir a mesma informação no título, subtítulo, corpo e callout.
 
@@ -350,6 +396,24 @@ footer: 'DISCIPLINA · SEMESTRE'
   `cards` não esticam e o diagrama acompanha o texto.
 - Para diagramas técnicos, use SVG inline; não use raster, foto ou banco de
   imagens. O tema escala `.media svg`, `.image-card svg` e `.media-slot svg`.
+
+## Armadilhas conhecidas
+
+Erros que já custaram uma rodada de correção; evite-os desde o início:
+
+- **"MÉTODO" dispara o aviso de placeholder.** O validador procura `TODO` como
+  palavra, e `É` não conta como letra; use outro rótulo (ex.: "FORMAS
+  NORMAIS") ou confie na correção do regex em `scripts/validate-slides.mjs`.
+- **HTML indentado depois de fenced code.** Um bloco HTML com ≥4 espaços de
+  indentação após uma linha em branco vira bloco de código no Marp e engole a
+  coluna. Deixe a fence como último elemento da coluna e os fechamentos a ≤3
+  espaços.
+- **Fenced ```sql pode renderizar com clipping** (`marp-pre`). Prefira o
+  componente `.code` do tema para SQL.
+- **`rect` do `diagram-kit.mjs` exige `h`.** Chamada sem altura gera
+  `height="undefined"` e o texto branco some.
+- **PowerShell desta máquina não aceita `&&`.** Use `;` entre comandos ou
+  `npm run audit`, que roda os três de uma vez.
 
 ## Assets
 
